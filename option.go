@@ -14,12 +14,6 @@ func WithPassword(pwd string) Option {
 	}
 }
 
-func WithPort(port int) Option {
-	return func(p *Pool) {
-		p.port = port
-	}
-}
-
 func WithDB(db int) Option {
 	return func(p *Pool) {
 		p.db = db
