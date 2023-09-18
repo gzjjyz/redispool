@@ -2,7 +2,6 @@ package redispool
 
 import (
 	"container/list"
-	"fmt"
 	"github.com/gzjjyz/logger"
 	"gopkg.in/redis.v5"
 	"sync"
@@ -15,9 +14,8 @@ const (
 )
 
 type Pool struct {
-	host       string
+	host       string // host:port
 	password   string
-	port       int
 	db         int
 	totalCount int
 	minCount   int
@@ -31,11 +29,6 @@ func NewPool(opts ...Option) (*Pool, error) {
 
 	for _, opt := range opts {
 		opt(pool)
-	}
-
-	if pool.port == 0 {
-		pool.port = DefaultPort
-		logger.Info("redis port set default value(%d)", DefaultPort)
 	}
 
 	if pool.minCount <= 0 {
@@ -59,10 +52,9 @@ func (p *Pool) Pop() *redis.Client {
 	defer p.mutex.Unlock()
 
 	if p.clients.Len() == 0 {
-		host := fmt.Sprintf("%s:%d", p.host, p.port)
 		for i := 0; i < p.minCount; i++ {
 			p.clients.PushBack(redis.NewClient(&redis.Options{
-				Addr:     host,
+				Addr:     p.host,
 				Password: p.password,
 				DB:       p.db,
 			}))
