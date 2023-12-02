@@ -21,6 +21,8 @@ github.com/google/go-cmp v0.4.0/go.mod h1:v8dTdLbMG2kIc/vJvl+f65V22dbkXbowE6jgT/
 github.com/google/go-cmp v0.5.9 h1:O2Tfq5qg4qc4AmwVlvv0oLiVAGB7enBSJ2x2DqQFi38=
 github.com/gzjjyz/logger v0.0.0-20230915095704-4f47a2bda476 h1:VXtyBiT0XSajk1MzLf954NNOQ7FcuzxN/HZdt7qFpg8=
 github.com/gzjjyz/logger v0.0.0-20230915095704-4f47a2bda476/go.mod h1:gprPXTGx81jPjvyzlmtAXXipb19GljNksgvb/RfBhHI=
+github.com/gzjjyz/logger v1.0.4 h1:g0BIpovaGCCZMwOp2QmGJ1gDfEwTR6AQnVh7aSgA4JI=
+github.com/gzjjyz/logger v1.0.4/go.mod h1:gprPXTGx81jPjvyzlmtAXXipb19GljNksgvb/RfBhHI=
 github.com/gzjjyz/trace v0.0.0-20230831064247-64e42e91ac5d h1:PTnoIySa/HfBhvpT+S0AehoMGpiT+BTQF+xomG1ypkQ=
 github.com/gzjjyz/trace v0.0.0-20230831064247-64e42e91ac5d/go.mod h1:FOo0hrIPxyN2/x/MYlMKng+N+Wh+HehilHVHugYpNH4=
 github.com/hpcloud/tail v1.0.0/go.mod h1:ab1qPbhIpdTxEkNHXyeSf5vhxWSCs/tWer42PpOxQnU=

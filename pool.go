@@ -33,7 +33,7 @@ func NewPool(opts ...Option) (*Pool, error) {
 
 	if pool.minCount <= 0 {
 		pool.minCount = DefaultMin
-		logger.Info("redis client count set default value(%d)", DefaultMin)
+		logger.LogInfo("redis client count set default value(%d)", DefaultMin)
 	}
 
 	pool.clients = list.New()
@@ -45,6 +45,18 @@ func NewPool(opts ...Option) (*Pool, error) {
 		return nil, err
 	}
 	return pool, nil
+}
+
+func (p *Pool) Close() (err error) {
+	p.mutex.Lock()
+	defer p.mutex.Unlock()
+
+	for p.clients.Len() > 1 {
+		client := p.clients.Front().Value.(*redis.Client)
+		p.clients.Remove(p.clients.Front())
+		err = client.Close()
+	}
+	return
 }
 
 func (p *Pool) Pop() *redis.Client {
@@ -109,10 +121,10 @@ func (p *Pool) gc() {
 		p.clients.Remove(p.clients.Front())
 		err := client.Close()
 		if err != nil {
-			logger.Errorf("free redis client error! %v", err)
+			logger.LogError("free redis client error! %v", err)
 		}
 	}
 
-	logger.Warn("redis clear:free-connect-cnt: %d, total-connect-cnt: %d", p.clients.Len(), p.totalCount)
+	logger.LogWarn("redis clear:free-connect-cnt: %d, total-connect-cnt: %d", p.clients.Len(), p.totalCount)
 	p.changeAt = time.Now()
 }

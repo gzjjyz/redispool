@@ -2,7 +2,7 @@ module github.com/gzjjyz/redispool
 
 go 1.20
 
-require github.com/gzjjyz/logger v0.0.0-20230915095704-4f47a2bda476
+require github.com/gzjjyz/logger v1.0.4
 
 require gopkg.in/redis.v5 v5.2.9
 
